@@ -5,7 +5,7 @@
 <div class="container">
     <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
         <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
-            <span class="text-uppercase cl2 p-r-8">
+            <!-- <span class="text-uppercase cl2 p-r-8">
                 Trending Now:
             </span>
 
@@ -21,7 +21,7 @@
                 <span class="dis-inline-block slide100-txt-item animated visible-false">
                     Microsoft quisque at ipsum vel orci eleifend ultrices
                 </span>
-            </span>
+            </span> -->
         </div>
 
         <form action="{{ route('home.posts') }}" method="GET">

@@ -35,8 +35,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('login', [AuthController::class, 'post'])->name('loginPost');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('profile',   [DashboardController::class, 'profile'])->name('profile');
+    Route::get('dashboard',       [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile',         [DashboardController::class, 'profile'])->name('profile');
+    Route::post('profile/update', [DashboardController::class, 'profile'])->name('profile.update');
 
     Route::group(['prefix' => 'pages', 'as' => 'pages.'], function () {
         Route::post('update/{id}', [PagesController::class, 'update'])->name('update');

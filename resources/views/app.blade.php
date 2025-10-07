@@ -5,6 +5,7 @@
     <title>Voxnusa</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @yield('meta')
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('dist/img/icon.png') }}" />
     <!--===============================================================================================-->
@@ -166,7 +167,7 @@
                     <!-- Menu desktop -->
                     <nav class="menu-desktop">
                         <a class="logo-stick" href="index.html">
-                            <img src="images/icons/logo-01.png" alt="LOGO">
+                            <img src="{{ asset('dist/img/logo.png') }}" alt="LOGO">
                         </a>
 
                         <ul class="main-menu">

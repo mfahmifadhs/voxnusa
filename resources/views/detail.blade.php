@@ -1,6 +1,14 @@
 @extends('app')
 @section('content')
 
+@section('meta')
+<meta property="og:image" content="{{ asset('dist/img/thumbnail/'. $data->thumbnail) }}" />
+<meta property="og:title" content="{{ $data->title }}" />
+<meta property="og:description" content="{{ Str::limit(strip_tags($data->content), 150) }}" />
+<meta property="og:url" content="{{ url()->current() }}" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Voxnusa" />
+@endsection
 
 <!-- Breadcrumb -->
 <div class="container">
@@ -57,13 +65,13 @@
                                 </span>
                             </span>
 
-                            <span class="f1-s-3 cl8 m-r-15">
+                            <!-- <span class="f1-s-3 cl8 m-r-15">
                                 {{ $data->views }} views
                             </span>
 
                             <a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
                                 0 Comment
-                            </a>
+                            </a> -->
                         </div>
 
                         <div class="wrap-pic-max-w p-b-30">
@@ -184,6 +192,32 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <div class="mt-4">
+                        <h5>Bagikan Berita:</h5>
+                        <div class="d-flex gap-2">
+                            <a href="https://api.whatsapp.com/send?text={{ urlencode($data->title . ' ' . url()->current()) }}"
+                                target="_blank" class="btn btn-success btn-sm m-1">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
+                                target="_blank" class="btn btn-primary btn-sm m-1">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+
+                            <a href="https://twitter.com/intent/tweet?text={{ urlencode($data->title) }}&url={{ urlencode(url()->current()) }}"
+                                target="_blank" class="btn btn-info btn-sm m-1">
+                                <i class="fab fa-twitter"></i> X (Twitter)
+                            </a>
+
+                            <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode($data->title) }}"
+                                target="_blank" class="btn btn-secondary btn-sm m-1">
+                                <i class="fab fa-telegram-plane"></i> Telegram
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

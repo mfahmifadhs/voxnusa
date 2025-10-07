@@ -256,10 +256,10 @@ class PostController extends Controller
         $data = Post::findOrFail($id);
         if ($request->status == 'published') {
             $data->update([
-                'reviewer_id' => Auth::user()->id,
-                'status'      => $request->status,
-                'notes'       => $request->notes,
-                'publised_at' => Carbon::now()
+                'reviewer_id'  => Auth::user()->id,
+                'status'       => $request->status,
+                'notes'        => $request->notes,
+                'published_at' => Carbon::now()
             ]);
         } else {
             $data->update([

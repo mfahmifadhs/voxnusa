@@ -15,6 +15,7 @@ use App\Models\Usulan;
 use App\Models\Visitor;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Hash;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -51,5 +52,32 @@ class DashboardController extends Controller
         }
 
         return view('pages.index', compact('users', 'pages', 'posts', 'category', 'visitorData'));
+    }
+
+    public function profile(Request $request)
+    {
+        if (!$request->aksi) {
+            $data = User::where('id', Auth::user()->id)->first();
+            return view('pages.profile', compact('data'));
+        }
+
+        $id = Auth::user()->id;
+
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'username'   => 'unique:users,username,' . $user->id,
+        ]);
+
+        $user->update([
+            'role_id'       => Auth::user()->role_id,
+            'name'          => $request->name,
+            'username'      => $request->username,
+            'password'      => Hash::make($request->password),
+            'password_text' => $request->password,
+            'status'        => Auth::user()->status
+        ]);
+
+        return redirect()->route('profile')->with('success', ' Successfully!');
     }
 }
