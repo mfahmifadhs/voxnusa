@@ -29,14 +29,16 @@ class HomeController extends Controller
             ->latest('visited_at')
             ->first();
 
-        $lastTime  = Carbon::parse($lastVisit->visited_at);
+        if ($lastVisit) {
+            $lastTime  = Carbon::parse($lastVisit->visited_at);
 
-        if ($lastTime->diffInMinutes($now) >= 60) {
-            Visitor::create([
-                'ip_address' => $ip,
-                'user_agent' => request()->header('User-Agent'),
-                'url' => request()->fullUrl(),
-            ]);
+            if ($lastTime->diffInMinutes($now) >= 60) {
+                Visitor::create([
+                    'ip_address' => $ip,
+                    'user_agent' => request()->header('User-Agent'),
+                    'url' => request()->fullUrl(),
+                ]);
+            }
         }
 
 

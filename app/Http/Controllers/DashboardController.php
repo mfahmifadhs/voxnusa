@@ -25,13 +25,19 @@ class DashboardController extends Controller
         $pages    = Pages::get();
         $category = Category::orderBy('name', 'asc')->get();
         $posts    = Post::get();
+        $users    = User::where('role_id', 3)->get();
 
 
-        $visitorData = Visitor::selectRaw('DATE_FORMAT(visited_at, "%d %b %Y") as date, COUNT(*) as total')
-            ->groupBy('date')
-            ->orderBy('date', 'ASC')
+        $visitorData = Visitor::selectRaw('
+            DATE(visited_at) as real_date,
+            DATE_FORMAT(visited_at, "%d %b %Y") as date,
+            COUNT(*) as total
+        ')
+            ->groupBy('real_date', 'date')
+            ->orderBy('real_date', 'DESC') // ambil dari yang terbaru dulu
             ->take(7)
-            ->get();
+            ->get()
+            ->sortBy('real_date');
 
         if ($role == 3) {
             $data = Post::count();
@@ -44,6 +50,6 @@ class DashboardController extends Controller
             return view('pages.user', compact('data', 'visitorData', 'category', 'user', 'selectCategory', 'selectUser', 'selectStatus'));
         }
 
-        return view('pages.index', compact('pages', 'posts', 'category', 'visitorData'));
+        return view('pages.index', compact('users', 'pages', 'posts', 'category', 'visitorData'));
     }
 }
