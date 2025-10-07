@@ -49,7 +49,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     @else
                     <h3><b>
-                        <img src="{{ asset('dist/img/icon.png') }}" alt=""> Voxnusa
+                        <img src="{{ asset('dist/img/logo.png') }}" class="img-fluid" width="150" alt="">
                     </b></h3>
                     @endif
                 </li>

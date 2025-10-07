@@ -51,10 +51,6 @@ class CategoryController extends Controller
             $aksi   = '';
 
             $aksi .= '
-                <a href="' . route('category.detail', $row->id) . '" class="btn btn-default btn-xs bg-primary rounded border-dark">
-                    <i class="fas fa-info-circle p-1" style="font-size: 12px;"></i>
-                </a>
-
                 <a href="' . route('category.edit', $row->id) . '" class="btn btn-default btn-xs bg-warning rounded border-dark">
                     <i class="fas fa-edit p-1" style="font-size: 12px;"></i>
                 </a>
